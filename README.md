@@ -28,10 +28,15 @@ pnpm dev
 📁 Folder Structure
 
 src/
+
 ├── app/                # Next.js pages and routes
+
 ├── components/         # UI components
+
 ├── context/            # React Context for global state
+
 ├── lib/                # API utilities (CoinGecko)
+
 ├── types/              # TypeScript types
 
 
