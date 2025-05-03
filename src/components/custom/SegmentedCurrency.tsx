@@ -4,6 +4,7 @@ import { useCrypto } from "@/context/CryptoContext"
 import { useDebouncedValue } from "@/hooks/useDebounceValue"
 import { SegmentGroup } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
+import SpinnerComponent from "./Spinner"
 
 export default function SegmentedCurrency() {
     const [value, setValue] = useState<string | null>("$")
@@ -21,14 +22,19 @@ export default function SegmentedCurrency() {
     }, [debouncedValue, setCurrency])
 
     return (
-        <SegmentGroup.Root 
-        disabled={isLoading} 
-        value={value} 
-        onValueChange={(e) => setValue(e.value)}
-        className={`segment-group ${isLoading ? 'disabled-cursor' : ''}`}
-        >
-            <SegmentGroup.Indicator />
-            <SegmentGroup.Items cursor="pointer" items={["$", "€", "R$"]} />
-        </SegmentGroup.Root>
+
+        <div className="segment-container">
+            <SegmentGroup.Root
+                disabled={isLoading}
+                value={value}
+                onValueChange={(e) => setValue(e.value)}
+                className={`segment-group ${isLoading ? 'disabled-cursor' : ''}`}
+            >
+                <SegmentGroup.Indicator />
+                <SegmentGroup.Items cursor="pointer" items={["$", "€", "R$"]} />
+            </SegmentGroup.Root>
+
+            {isLoading && <SpinnerComponent/> }
+        </div>
     )
 }

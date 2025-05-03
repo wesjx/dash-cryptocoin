@@ -86,6 +86,12 @@ body {
   padding: 2rem
 }
 
+.segment-container{
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
 
 @media (max-width: 999px) {
   .cards-container {
