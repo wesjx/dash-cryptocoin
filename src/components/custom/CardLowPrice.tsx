@@ -30,7 +30,7 @@ export default function CardCurrentPrice() {
                     </p>
                 </Card.Title>
                 <Card.Description className="price low-price" >
-                    <FaArrowDown size={25} />
+                    <FaArrowDown size={30} />
                     {formatPrice(selectedCoin.low_24h)}
                 </Card.Description>
             </Card.Body>

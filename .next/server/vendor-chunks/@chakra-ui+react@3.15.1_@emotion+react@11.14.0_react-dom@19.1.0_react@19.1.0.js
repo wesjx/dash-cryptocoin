@@ -11,26 +11,6 @@ exports.id = "vendor-chunks/@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react
 exports.ids = ["vendor-chunks/@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react-dom@19.1.0_react@19.1.0"];
 exports.modules = {
 
-/***/ "(rsc)/./node_modules/.pnpm/@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react-dom@19.1.0_react@19.1.0/node_modules/@chakra-ui/react/dist/esm/components/flex/flex.js":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react-dom@19.1.0_react@19.1.0/node_modules/@chakra-ui/react/dist/esm/components/flex/flex.js ***!
-  \************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Flex: () => (/* binding */ Flex)
-/* harmony export */ });
-/* harmony import */ var react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-server-dom-webpack/server.edge */ "(rsc)/./node_modules/.pnpm/next@15.3.0_react-dom@19.1.0_react@19.1.0/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-webpack-server-edge.js");
-
-const Flex = (0,react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__.registerClientReference)(
-function() { throw new Error("Attempted to call Flex() from the server but Flex is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."); },
-"C:\\Users\\wesjr\\Documents\\Projetos\\dash-cryptocoin\\node_modules\\.pnpm\\@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react-dom@19.1.0_react@19.1.0\\node_modules\\@chakra-ui\\react\\dist\\esm\\components\\flex\\flex.js",
-"Flex",
-);
-
-/***/ }),
-
 /***/ "(ssr)/./node_modules/.pnpm/@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react-dom@19.1.0_react@19.1.0/node_modules/@chakra-ui/react/dist/esm/anatomy.js":
 /*!***********************************************************************************************************************************************************!*\
   !*** ./node_modules/.pnpm/@chakra-ui+react@3.15.1_@emotion+react@11.14.0_react-dom@19.1.0_react@19.1.0/node_modules/@chakra-ui/react/dist/esm/anatomy.js ***!
