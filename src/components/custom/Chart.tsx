@@ -17,17 +17,23 @@ export default function ChartMain() {
   const [chartData, setChartData] = useState<ChartPoint[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-      if (!selectedCoin?.id) return;
-    
-      const cacheKey = `${selectedCoin.id}-${currency}`;
-      const cachedData = localStorage.getItem(cacheKey);
-      const lastFetchTime = localStorage.getItem(`${cacheKey}-time`);
-    
-      const currentTime = new Date().getTime();
-    
-      if (cachedData && lastFetchTime && (currentTime - Number(lastFetchTime)) < 5 * 60 * 1000) {
-        setChartData(JSON.parse(cachedData));
+  useEffect(() => {
+    if (!selectedCoin?.id) return;
+  
+    const cacheKey = `${selectedCoin.id}-${currency}`;
+    const cachedData = localStorage.getItem(cacheKey);
+    const lastFetchTime = localStorage.getItem(`${cacheKey}-time`);
+  
+    const currentTime = new Date().getTime();
+  
+    const shouldUseCache =
+      cachedData &&
+      lastFetchTime &&
+      (currentTime - Number(lastFetchTime)) < 5 * 60 * 1000;
+  
+    const timer = setTimeout(() => {
+      if (shouldUseCache) {
+        setChartData(JSON.parse(cachedData!));
       } else {
         async function fetchData() {
           setIsLoading(true);
@@ -36,7 +42,7 @@ export default function ChartMain() {
               `https://api.coingecko.com/api/v3/coins/${selectedCoin?.id}/market_chart?vs_currency=${currency}&days=10&interval=daily`
             );
             const data = await res.json();
-    
+  
             const formatted = data.prices.map(([timestamp, price]: [number, number]) => {
               const date = new Date(timestamp);
               const day = String(date.getDate()).padStart(2, '0');
@@ -46,10 +52,10 @@ export default function ChartMain() {
                 price: Number(price.toFixed(2)),
               };
             });
-    
+  
             localStorage.setItem(cacheKey, JSON.stringify(formatted));
             localStorage.setItem(`${cacheKey}-time`, currentTime.toString());
-    
+  
             setChartData(formatted);
           } catch (err) {
             console.error("Error loading chart:", err);
@@ -57,9 +63,14 @@ export default function ChartMain() {
             setIsLoading(false);
           }
         }
+  
         fetchData();
       }
-    }, [selectedCoin?.id, currency]);
+    }, 5000);
+  
+    return () => clearTimeout(timer);
+  }, [selectedCoin?.id, currency]);
+  
     
 
   const chart = useChart({

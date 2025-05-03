@@ -1,16 +1,22 @@
 "use client"
 
 import { useCrypto } from "@/context/CryptoContext"
+import { useDebouncedCallback } from "@/hooks/useDebounceCallback"
 import { ButtonGroup, IconButton, Pagination } from "@chakra-ui/react"
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu"
 
 export default function PaginationNav() {
 
-  const { setCurrentPage } = useCrypto()
+  const { setCurrentPage, setIsLoading } = useCrypto()
 
-  function handleClick(page: number) {
-    setCurrentPage(page)
-  }
+  const debouncedSetPage = useDebouncedCallback((page: number) => {
+    setCurrentPage(page);
+  }, 500, setIsLoading);
+  
+
+  // function handleClick(page: number) {
+  //   setCurrentPage(page)
+  // }
 
   return (
     <Pagination.Root count={20} pageSize={2} defaultPage={1}>
@@ -23,7 +29,7 @@ export default function PaginationNav() {
 
         <Pagination.Items
           render={(page) => (
-            <IconButton onClick={() => handleClick(page.value)} variant={{ base: "ghost", _selected: "outline" }}>
+            <IconButton onClick={() => debouncedSetPage(page.value)} variant={{ base: "ghost", _selected: "outline" }}>
               {page.value}
             </IconButton>
           )}

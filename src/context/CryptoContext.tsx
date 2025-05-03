@@ -17,6 +17,7 @@ type CoinDetails = {
 interface CryptoContextType {
   coins: Coins[];
   isLoading: boolean;
+  setIsLoading: (value: boolean) => void; 
   selectedCoin: CoinDetails | null;
   setSelectedCoin: (coin: CoinDetails) => void;
   setCurrentPage: (page: number) => void;
@@ -34,7 +35,11 @@ export const CryptoProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currency, setCurrency] = useState('usd')
 
+  
   useEffect(() => {
+    setIsLoading(true);
+
+
     getTopCoins(currentPage, currency).then((data) => {
       setCoins(data);
       setIsLoading(false);
@@ -75,7 +80,7 @@ export const CryptoProvider = ({ children }: { children: React.ReactNode }) => {
   }, [currentPage, currency]);
 
   return (
-    <CryptoContext.Provider value={{ coins, isLoading, selectedCoin, setSelectedCoin, setCurrentPage, currentPage, setCurrency, currency }}>
+    <CryptoContext.Provider value={{ coins, isLoading, selectedCoin, setSelectedCoin, setCurrentPage, currentPage, setCurrency, currency, setIsLoading }}>
       {children}
     </CryptoContext.Provider>
   );

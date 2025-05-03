@@ -1,25 +1,32 @@
 "use client"
 
 import { useCrypto } from "@/context/CryptoContext"
+import { useDebouncedValue } from "@/hooks/useDebounceValue"
 import { SegmentGroup } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 
 export default function SegmentedCurrency() {
     const [value, setValue] = useState<string | null>("$")
-    const { setCurrency } = useCrypto()
+    const { setCurrency, isLoading } = useCrypto()
+    const debouncedValue = useDebouncedValue(value, 5000)
 
     useEffect(() => {
-        if (value === "€") {
+        if (debouncedValue === "€") {
             setCurrency("eur")
-        } else if (value === "$") {
+        } else if (debouncedValue === "$") {
             setCurrency("usd")
-        } else if (value === "R$") {
+        } else if (debouncedValue === "R$") {
             setCurrency("brl")
         }
-    }, [value, setCurrency])
+    }, [debouncedValue, setCurrency])
 
     return (
-        <SegmentGroup.Root value={value} onValueChange={(e) => setValue(e.value)}>
+        <SegmentGroup.Root 
+        disabled={isLoading} 
+        value={value} 
+        onValueChange={(e) => setValue(e.value)}
+        className={`segment-group ${isLoading ? 'disabled-cursor' : ''}`}
+        >
             <SegmentGroup.Indicator />
             <SegmentGroup.Items cursor="pointer" items={["$", "€", "R$"]} />
         </SegmentGroup.Root>

@@ -68,3 +68,7 @@ body {
     }
   }
 }
+
+.disabled-cursor{
+  cursor: not-allowed;
+}
