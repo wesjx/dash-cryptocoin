@@ -41,7 +41,7 @@ src/
 
 
 📌 Todo
-- Add responsive design
+- Add responsive design ✅ Done
 
 - Add More charts
 
